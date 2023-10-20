@@ -9,6 +9,7 @@ button{
   border-radius: 0.5em;
   border: none;
 
+  font-family: 'Courier New', Courier, monospace;
   background-image: linear-gradient(90deg, #8751f4, #4e77ff);
 }
 

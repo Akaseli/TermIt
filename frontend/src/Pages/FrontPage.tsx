@@ -1,22 +1,23 @@
 import React from 'react'
 import { GradientButton } from '../components/GradientButton';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
 
 }
 
 export const FrontPage: React.FC<Props> = () => {
+  const navigate = useNavigate()
+
   return(
     <div className='column'>
-      <h1>TermIt</h1>
-
       <div className='row'>
         <GradientButton>
           Login
         </GradientButton>
-        <GradientButton>
-          Sign Up
-        </GradientButton>  
+        <GradientButton onClick={() => navigate("/signup")}>
+          Signup
+        </GradientButton>
       </div>
     </div>
   );
