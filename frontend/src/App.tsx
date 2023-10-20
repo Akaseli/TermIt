@@ -1,15 +1,16 @@
 import React from 'react'
 import "./App.css"
-import { GradientButton } from './components/GradientButton';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { FrontPage } from './Pages/FrontPage';
 
 function App(){
+  const router = createBrowserRouter([
+    {path: "/", Component: FrontPage},
+    {path: "/signup", Component: () => {return <p>page</p>}}
+  ])
+
   return(
-    <div>
-      <h1>TermIt</h1>
-      <GradientButton>
-        Nappula
-      </GradientButton>
-    </div>
+    <RouterProvider router={router}/>
   );
 }
 

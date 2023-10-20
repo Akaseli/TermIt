@@ -7,6 +7,13 @@ module.exports = {
     open: true
   },
   devtool: 'cheap-module-source-map',
+  devServer: {
+    historyApiFallback: true,
+    //proxy for api
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }
+  },
   plugins : [
     new ReactRefreshWebpackPlugin()
   ]
