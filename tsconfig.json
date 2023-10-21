@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "esnext",
+    "target": "ES2021",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "lib": [
       "dom",
-      "esnext"
+      "ES2021"
     ],
     "jsx": "react-jsx",
     "noEmit": true ,
