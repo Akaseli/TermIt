@@ -6,6 +6,8 @@ const app = express()
 const port = 3000
 const server = http.createServer(app)
 
+app.use("/api/static", express.static('backend/static'))
+
 app.use(
   cors({
     origin: "http://localhost:8080",

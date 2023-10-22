@@ -31,3 +31,38 @@ input{
   padding: 5px;
   min-width: 250px;
 }
+
+.appbar {
+  display: block;
+  width: 100%;
+  margin-left: 0px;
+  background-color: rgb(37, 37, 37);
+  box-shadow: 0px 5px 5px rgb(41, 41, 41);
+}
+
+.langMenu {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.langSelector {
+  padding: 5px;
+  margin-left: 5px;
+
+  min-width: 10ch;
+  max-width: 20ch;
+
+  color: white;
+
+  border: 1px solid rgb(68, 68, 68);
+  border-radius: 0.25em;
+
+  cursor: pointer;
+  background-color: rgb(33, 33, 33);
+  display: grid;
+}
+
+.langFlag {
+  height: 30px;
+}
