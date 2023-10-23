@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { FrontPage } from './Pages/FrontPage';
 import { SignupPage } from './Pages/SignupPage';
 import { useTranslation } from 'react-i18next';
+import { LoadingPage } from './Pages/LoadingPage';
 
 function App(){
   const router = createBrowserRouter([
