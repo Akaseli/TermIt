@@ -51,7 +51,7 @@ export const SignupPage: React.FC<Props> = () => {
         </div>
 
         <GradientButton onClick={signup}>
-          Signup
+          {t('signup')}
         </GradientButton>
 
       </div>
