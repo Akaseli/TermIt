@@ -14,7 +14,7 @@ export const FrontPage: React.FC<Props> = () => {
   return(
     <div className='column'>
       <div className='row'>
-        <GradientButton>
+        <GradientButton onClick={() => navigate("/login")}>
           {t('login')}
         </GradientButton>
         <GradientButton onClick={() => navigate("/signup")}>

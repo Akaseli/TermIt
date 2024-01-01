@@ -8,27 +8,27 @@ interface Props {
 
 }
 
-export const SignupPage: React.FC<Props> = () => {
+export const LoginPage: React.FC<Props> = () => {
   const {t, i18n} = useTranslation()
   
-  const [registerPass, setRegisterPass] = useState("")
-  const [registerUser, setRegisterUser] = useState("")
+  const [loginPass, setLoginPass] = useState("")
+  const [loginUser, setLoginUser] = useState("")
 
   const navigate = useNavigate()
-  
-  const signup = () => {
+
+  const login = () => {
     axios({
       method: "POST",
       data: {
-        username: registerUser,
-        password: registerPass
+        username: loginUser,
+        password: loginPass
       },
       withCredentials: true,
-      url: "/api/signup/"
+      url: "/api/login/"
     }).then((response) => {
       //Successfull
       if(response.data.status == "success"){
-        navigate("/login")
+        navigate("/api/user/")
       }
       else{
         //Show error/etc
@@ -42,19 +42,19 @@ export const SignupPage: React.FC<Props> = () => {
 
         <div className='row'>
           <p>{t('username')}</p>
-          <input type='text' onChange={(e) => setRegisterUser(e.target.value)}></input>
+          <input type='text' onChange={(e) => setLoginUser(e.target.value)}></input>
         </div>
 
         <div className='row'>
           <p>{t('password')}</p>
-          <input type='password' onChange={(e) => setRegisterPass(e.target.value)}></input>
+          <input type='password' onChange={(e) => setLoginPass(e.target.value)}></input>
         </div>
 
-        <GradientButton onClick={signup}>
-          {t('signup')}
+        <GradientButton onClick={login}>
+          {t('login')}
         </GradientButton>
 
       </div>
-    </div>
+  </div>
   );
 }

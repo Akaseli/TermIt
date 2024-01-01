@@ -6,11 +6,13 @@ import { SignupPage } from './Pages/SignupPage';
 import { useTranslation } from 'react-i18next';
 import { LoadingPage } from './Pages/LoadingPage';
 import { ErrorPage } from './Pages/ErrorPage';
+import { LoginPage } from './Pages/LoginPage';
 
 function App(){
   const router = createBrowserRouter([
     {path: "/", Component: FrontPage},
     {path: "/signup", Component: SignupPage},
+    {path: "/login", Component: LoginPage},
     {path: "*", Component: ErrorPage}
   ])
 
