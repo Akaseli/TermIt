@@ -20,6 +20,20 @@ body{
   flex-direction: row;
 }
 
+.content{
+  margin: 10px;
+}
+
+.logo{
+  color: white;
+  text-decoration: none;
+  line-height: 2em;
+}
+
+label{
+  margin-right: 0.5em;
+}
+
 p{
   padding: 8px;
   margin: 0px;
@@ -30,10 +44,12 @@ input{
   border-radius: 5px;
   padding: 5px;
   min-width: 250px;
+
 }
 
 .appbar {
-  display: block;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   margin-left: 0px;
   background-color: rgb(37, 37, 37);

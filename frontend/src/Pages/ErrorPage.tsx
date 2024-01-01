@@ -1,13 +1,11 @@
-import React from 'react'
+import React from "react";
 
-interface Props {
-
-}
+interface Props {}
 
 export const ErrorPage: React.FC<Props> = () => {
-  return(
+  return (
     <div>
       <p>404 Page not found!</p>
     </div>
   );
-}
+};

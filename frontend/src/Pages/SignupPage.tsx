@@ -1,60 +1,53 @@
-import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next';
-import { GradientButton } from '../components/GradientButton';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { GradientButton } from "../components/GradientButton";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-interface Props {
-
-}
+interface Props {}
 
 export const SignupPage: React.FC<Props> = () => {
-  const {t, i18n} = useTranslation()
-  
-  const [registerPass, setRegisterPass] = useState("")
-  const [registerUser, setRegisterUser] = useState("")
+  const { t, i18n } = useTranslation();
 
-  const navigate = useNavigate()
-  
+  const [registerPass, setRegisterPass] = useState("");
+  const [registerUser, setRegisterUser] = useState("");
+
+  const navigate = useNavigate();
+
   const signup = () => {
     axios({
       method: "POST",
       data: {
         username: registerUser,
-        password: registerPass
+        password: registerPass,
       },
       withCredentials: true,
-      url: "/api/signup/"
+      url: "/api/signup/",
     }).then((response) => {
       //Successfull
-      if(response.data.status == "success"){
-        navigate("/login")
-      }
-      else{
+      if (response.data.status == "success") {
+        navigate("/login");
+      } else {
         //Show error/etc
       }
-    })
-  }
+    });
+  };
 
-  return(
+  return (
     <div>
-      <div className='column'>
-
-        <div className='row'>
-          <p>{t('username')}</p>
-          <input type='text' onChange={(e) => setRegisterUser(e.target.value)}></input>
+      <div className="column">
+        <div className="row">
+          <label htmlFor="username">{t("username")}</label>
+          <input id="username" type="text" onChange={(e) => setRegisterUser(e.target.value)}/>
         </div>
 
-        <div className='row'>
-          <p>{t('password')}</p>
-          <input type='password' onChange={(e) => setRegisterPass(e.target.value)}></input>
+        <div className="row">
+          <label htmlFor="password">{t("password")}</label>
+          <input id="password" type="password" onChange={(e) => setRegisterPass(e.target.value)}/>
         </div>
 
-        <GradientButton onClick={signup}>
-          {t('signup')}
-        </GradientButton>
-
+        <GradientButton onClick={signup}>{t("signup")}</GradientButton>
       </div>
     </div>
   );
-}
+};
