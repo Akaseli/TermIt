@@ -26,7 +26,7 @@ export const LoginPage: React.FC<Props> = () => {
     }).then((response) => {
       //Successfull
       if (response.data.status == "success") {
-        navigate("/api/user/");
+        navigate("/")
       } else {
         //Show error/etc
       }
@@ -37,13 +37,11 @@ export const LoginPage: React.FC<Props> = () => {
     <div>
       <div className="column">
         <div className="row">
-          <label htmlFor="username">{t("username")}</label>
-          <input id="username" type="text" onChange={(e) => setLoginUser(e.target.value)}/>
+          <input placeholder="Username" type="text" onChange={(e) => setLoginUser(e.target.value)}/>
         </div>
 
         <div className="row">
-          <label htmlFor="password">{t("password")}</label>
-          <input id="password" type="password" onChange={(e) => setLoginPass(e.target.value)}/>
+          <input placeholder="Password" type="password" onChange={(e) => setLoginPass(e.target.value)}/>
         </div>
 
         <GradientButton onClick={login}>{t("login")}</GradientButton>

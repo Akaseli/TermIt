@@ -37,13 +37,11 @@ export const SignupPage: React.FC<Props> = () => {
     <div>
       <div className="column">
         <div className="row">
-          <label htmlFor="username">{t("username")}</label>
-          <input id="username" type="text" onChange={(e) => setRegisterUser(e.target.value)}/>
+          <input placeholder="Username" type="text" onChange={(e) => setRegisterUser(e.target.value)}/>
         </div>
 
         <div className="row">
-          <label htmlFor="password">{t("password")}</label>
-          <input id="password" type="password" onChange={(e) => setRegisterPass(e.target.value)}/>
+          <input placeholder="Password" type="password" onChange={(e) => setRegisterPass(e.target.value)}/>
         </div>
 
         <GradientButton onClick={signup}>{t("signup")}</GradientButton>
