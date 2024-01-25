@@ -3,5 +3,6 @@
   "signup": "Sign up",
   "login": "Login",
   "username": "Username",
-  "password": "Password"
+  "password": "Password",
+  "welcome": "Welcome"
 }

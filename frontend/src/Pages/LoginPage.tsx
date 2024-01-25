@@ -3,16 +3,19 @@ import { useTranslation } from "react-i18next";
 import { GradientButton } from "../components/GradientButton";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { userLogin } from "../app/behaviours/userSlice";
 
 interface Props {}
 
 export const LoginPage: React.FC<Props> = () => {
   const { t, i18n } = useTranslation();
 
-  const [loginPass, setLoginPass] = useState("");
-  const [loginUser, setLoginUser] = useState("");
+  const [loginPass, setLoginPass] = useState("")
+  const [loginUser, setLoginUser] = useState("")
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const login = () => {
     axios({
@@ -26,12 +29,13 @@ export const LoginPage: React.FC<Props> = () => {
     }).then((response) => {
       //Successfull
       if (response.data.status == "success") {
+        dispatch(userLogin({id: response.data.id, username: response.data.username}))
         navigate("/")
       } else {
         //Show error/etc
       }
-    });
-  };
+    })
+  }
 
   return (
     <div>
@@ -47,5 +51,5 @@ export const LoginPage: React.FC<Props> = () => {
         <GradientButton onClick={login}>{t("login")}</GradientButton>
       </div>
     </div>
-  );
+  )
 };

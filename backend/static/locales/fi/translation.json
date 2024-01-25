@@ -3,5 +3,6 @@
   "signup": "Luo tili",
   "login": "Kirjaudu",
   "username": "Käyttäjänimi",
-  "password": "Salasana"
+  "password": "Salasana",
+  "welcome": "Tervetuloa"
 }
