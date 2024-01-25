@@ -1,8 +1,8 @@
 {
   "login": "Kirjaudu",
   "signup": "Luo tili",
-  "login": "Kirjaudu",
   "username": "Käyttäjänimi",
   "password": "Salasana",
-  "welcome": "Tervetuloa"
+  "welcome": "Tervetuloa",
+  "logout": "Kirjaudu ulos"
 }

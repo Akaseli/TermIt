@@ -2,9 +2,10 @@ import React from "react";
 import { GradientButton } from "../components/GradientButton";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import axios from "axios";
+import { userLogin } from "../app/behaviours/userSlice";
 
 interface Props {}
 
@@ -12,14 +13,28 @@ export const FrontPage: React.FC<Props> = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
+  const dispatch = useDispatch()
   const user = useSelector((state: RootState) => state.user)
+
+  const logout = () => {
+    axios.post("/api/logout").then((response) => {
+      if(response.status == 200){
+        dispatch(userLogin({id: undefined, username: undefined}))
+      }
+    })
+  }
 
   return (
     <div className="column">
       <div className="row">
         {
           user.id ? (
-            <p>{t("welcome") + " " + user.username + "!"}</p>
+            <div>
+              <p>{t("welcome") + " " + user.username + "!"}</p>
+              <GradientButton onClick={logout}>
+                {t("logout")}
+              </GradientButton>
+            </div>
           ):
           (
             <div>

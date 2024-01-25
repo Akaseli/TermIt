@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { FrontPage } from "./Pages/FrontPage";
@@ -7,6 +7,11 @@ import { useTranslation } from "react-i18next";
 import { LoadingPage } from "./Pages/LoadingPage";
 import { ErrorPage } from "./Pages/ErrorPage";
 import { LoginPage } from "./Pages/LoginPage";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "./app/store";
+import axios from "axios";
+import { response } from "express";
+import { userLogin } from "./app/behaviours/userSlice";
 
 function App() {
   const router = createBrowserRouter([
@@ -17,6 +22,22 @@ function App() {
   ]);
 
   const { t, i18n } = useTranslation();
+
+  const dispatch = useDispatch()
+  const user = useSelector((state: RootState) => state.user)
+
+  useEffect(() => {
+    if(!user.id){
+      axios.get("/api/user").then((response) => {
+        console.log(response)
+        if(response.status == 200){
+          dispatch(userLogin(response.data))
+        }
+      }).catch((reason) => {
+        //Not logged in
+      })
+    }
+  }, [])
 
   return (
     <div>

@@ -180,6 +180,12 @@ app.post("/api/signup/", (req, res) => {
   })
 })
 
+app.post("/api/logout", (req, res) => {
+  if(req.cookies["jwt"]){
+    res.clearCookie("jwt").send()
+  }
+})
+
 app.get("/api/user", passport.authenticate("jwt", {session: false}), async (req, res) => {
   res.send({id: req.user?.id, username: req.user?.username})
 })
