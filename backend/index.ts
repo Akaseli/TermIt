@@ -83,13 +83,14 @@ passport.use("jwt", new JwtStrategy(options, (jwt_payload, done) => {
     if (err){
       throw err
     }
-    //User exists
-    if (result.rowCount > 0){
-      return done(null, jwt_payload)
+    if(result.rowCount){
+      //User exists
+      if (result.rowCount > 0){
+        return done(null, jwt_payload)
+      }
     }
-    else {
-      return done(null, false)
-    }
+    
+    return done(null, false)
   })
 }));
 
