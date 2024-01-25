@@ -133,18 +133,18 @@ app.post("/api/login/", (req, res) => {
       }
       //Incorrect password
       else{
-        res.send({message: "Incorrect username or password."})
+        res.send({message: "Incorrect username or password.", status: "failure"})
       }
     }
     //No user
     else{
-      res.send({message: "Incorrect username or password."})
+      res.send({message: "Incorrect username or password.", status: "failure"})
     }
   })
 })
 
 app.post("/api/signup/", (req, res) => {
-  //TODO validate password lenght and username lenght
+
   if(req.body.username.length < 4){
     res.send({message: "Username too short."})
     return
@@ -160,7 +160,7 @@ app.post("/api/signup/", (req, res) => {
     }
     // User exists
     if (result.rows.length > 0){
-      res.send({message: "Username taken."})
+      res.send({message: "Username taken.", status: "failure"})
     }
 
     //Doesnt exist -> Create user
