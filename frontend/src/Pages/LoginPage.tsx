@@ -29,6 +29,7 @@ export const LoginPage: React.FC<Props> = () => {
     }).then((response) => {
       //Successfull
       if (response.data.status == "success") {
+        console.log("SUCCEEEDED")
         dispatch(userLogin({id: response.data.id, username: response.data.username}))
         navigate("/")
       } else {

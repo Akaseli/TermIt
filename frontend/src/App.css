@@ -22,6 +22,7 @@ body{
 
 .content{
   margin: 10px;
+  min-height: calc(100vh - 48px);
 }
 
 .logo{
@@ -82,4 +83,23 @@ input{
 
 .langFlag {
   height: 30px;
+}
+
+.footer{
+  background-color: rgb(37, 37, 37);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar{
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(37, 37, 37);
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(73, 73, 73);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
