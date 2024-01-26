@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import axios from "axios";
 import { userLogin } from "../app/behaviours/userSlice";
+import { SetCard } from "../components/SetCard";
 
 interface Props {}
 
@@ -49,6 +50,13 @@ export const FrontPage: React.FC<Props> = () => {
           )
         }
       </div>
+      
+      <h2>Sets</h2>
+      
+      <div className="setlist">
+        <SetCard set={{name: "Test", owner: "Test owner", terms: 215}} />
+      </div>
+
     </div>
   );
 };
