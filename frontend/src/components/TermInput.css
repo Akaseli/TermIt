@@ -8,4 +8,10 @@
 
   background-color: rgb(37, 37, 37);
   border-radius: 0.5em;
+
+  margin: 5px 0px;
+}
+
+.terminput input{
+  background-color: rgb(50, 50, 50);
 }
