@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import "./CreatePage.css"
 import { GradientButton } from '../components/GradientButton';
+import { TernInput } from '../components/TermInput';
 
 interface Props {
 
@@ -20,6 +21,11 @@ export const CreatePage: React.FC<Props> = () => {
           <h2>{t("terms")}</h2>
           <GradientButton>{t("add_term")}</GradientButton>
         </div>
+
+        <div className='column'>
+          <TernInput index={1}/>
+        </div>
+        
       </div>
       
     </div>

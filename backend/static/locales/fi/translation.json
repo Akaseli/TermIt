@@ -7,5 +7,7 @@
   "logout": "Kirjaudu ulos",
   "create": "Luo lista",
   "terms": "Termit",
-  "add_term": "Lisää termi"
+  "term": "Termi",
+  "add_term": "Lisää termi",
+  "definition": "Määritelmä"
 }

@@ -6,7 +6,8 @@
   "welcome": "Welcome",
   "logout": "Logout",
   "create": "Create a set",
-
   "terms": "Terms",
-  "add_term": "Add a term"
+  "term": "Term",
+  "add_term": "Add a term",
+  "definition": "Definition"
 }

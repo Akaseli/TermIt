@@ -40,12 +40,19 @@ p{
 }
 
 input{
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-radius: 5px;
-  padding: 5px;
+  padding: 8px;
   margin: 5px;
   min-width: 250px;
 
+  background-color: rgb(50, 50, 50);
+  border: none;
+  color: white;
+}
+
+input:focus{
+  outline: solid rgb(70, 70, 70);
 }
 
 .appbar {
