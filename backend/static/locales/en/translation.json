@@ -4,5 +4,9 @@
   "username": "Username",
   "password": "Password",
   "welcome": "Welcome",
-  "logout": "Logout"
+  "logout": "Logout",
+  "create": "Create a set",
+
+  "terms": "Terms",
+  "add_term": "Add a term"
 }

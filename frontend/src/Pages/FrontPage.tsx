@@ -1,12 +1,14 @@
 import React from "react";
 import { GradientButton } from "../components/GradientButton";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import axios from "axios";
 import { userLogin } from "../app/behaviours/userSlice";
 import { SetCard } from "../components/SetCard";
+
+import "./FrontPage.css"
 
 interface Props {}
 
@@ -26,26 +28,41 @@ export const FrontPage: React.FC<Props> = () => {
   }
 
   return (
-    <div className="column">
+    <div className="column frontpage">
       <div className="row">
         {
           user.id ? (
-            <div>
+            <div className="column">
               <p>{t("welcome") + " " + user.username + "!"}</p>
-              <GradientButton onClick={logout}>
-                {t("logout")}
-              </GradientButton>
+              <div className="row">
+                <GradientButton onClick={logout}>
+                  {t("logout")}
+                </GradientButton>
+
+                <Link to={"/create"}>
+                  <GradientButton>
+                    {t("create")}
+                  </GradientButton>
+                </Link>
+              </div>
+             
+
             </div>
           ):
           (
             <div>
-              <GradientButton onClick={() => navigate("/login")}>
-                {t("login")}
-              </GradientButton>
-              
-              <GradientButton onClick={() => navigate("/signup")}>
-                {t("signup")}
-              </GradientButton>
+              <Link to={"/login"}>
+                <GradientButton>
+                  {t("login")}
+                </GradientButton>
+              </Link>
+
+              <Link to={"/signup"}>
+                <GradientButton>
+                  {t("signup")}
+                </GradientButton>
+              </Link>
+
             </div>
           )
         }

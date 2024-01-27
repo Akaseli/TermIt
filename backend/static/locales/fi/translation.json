@@ -4,5 +4,8 @@
   "username": "Käyttäjänimi",
   "password": "Salasana",
   "welcome": "Tervetuloa",
-  "logout": "Kirjaudu ulos"
+  "logout": "Kirjaudu ulos",
+  "create": "Luo lista",
+  "terms": "Termit",
+  "add_term": "Lisää termi"
 }

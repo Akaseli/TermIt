@@ -11,12 +11,14 @@ import axios from "axios";
 import { userLogin } from "./app/behaviours/userSlice";
 
 import "./App.css";
+import { CreatePage } from "./Pages/CreatePage";
 
 function App() {
   const router = createBrowserRouter([
     { path: "/", Component: FrontPage },
     { path: "/signup", Component: SignupPage },
     { path: "/login", Component: LoginPage },
+    { path: "/create", Component: CreatePage},
     { path: "*", Component: ErrorPage },
   ]);
 
