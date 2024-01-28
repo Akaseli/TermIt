@@ -9,5 +9,8 @@
   "terms": "Termit",
   "term": "Termi",
   "add_term": "Lisää termi",
-  "definition": "Määritelmä"
+  "definition": "Määritelmä",
+  "info": "Tiedot",
+  "name": "Nimi",
+  "description": "Kuvaus"
 }

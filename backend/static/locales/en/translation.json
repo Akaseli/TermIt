@@ -9,5 +9,8 @@
   "terms": "Terms",
   "term": "Term",
   "add_term": "Add a term",
-  "definition": "Definition"
+  "definition": "Definition",
+  "info": "Info",
+  "name": "Name",
+  "description": "Description"
 }

@@ -44,6 +44,15 @@ export const CreatePage: React.FC<Props> = () => {
     <div className="column">
       <h1>{t('create')}</h1>
 
+      <div className='info'>
+        <h2>{t("info")}</h2>
+        <input placeholder={t("name")}></input>
+        <br/>
+        <textarea rows={4} placeholder={t("description")}></textarea>
+      </div>
+
+      <hr className='break'/>
+
       <div className='terms'>
         <div className="row header">
           <h2>{t("terms")}</h2>

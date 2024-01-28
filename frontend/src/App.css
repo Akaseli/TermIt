@@ -39,7 +39,7 @@ p{
   padding: 8px;
 }
 
-input{
+input, textarea{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-radius: 5px;
   padding: 8px;
@@ -51,7 +51,7 @@ input{
   color: white;
 }
 
-input:focus{
+input:focus, textarea:focus{
   outline: solid rgb(70, 70, 70);
 }
 
