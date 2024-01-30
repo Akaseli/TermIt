@@ -174,7 +174,7 @@ app.post("/api/signup/", (req, res) => {
           throw err
         }
         console.log("CREATED USER")
-        res.send({message: "Account Successfully created!", status: "success"})
+        res.send({message: "Account successfully created!", status: "success"})
       })
     }
   })
@@ -184,6 +184,33 @@ app.post("/api/logout", (req, res) => {
   if(req.cookies["jwt"]){
     res.clearCookie("jwt").send()
   }
+})
+
+//=== SET ROUTES ===
+app.post("/api/sets", passport.authenticate("jwt", {session: false}), async (req, res) => {
+  const userId = req.user?.id
+  const name = req.body.name
+  const description = req.body.description
+  const terms = req.body.terms
+
+  pool.query("INSERT INTO sets(owner, name, description, terms) VALUES ($1, $2, $3, $4)", [userId, name, description, terms], (err, result) => {
+    if(err){
+      throw err
+    }
+    console.log("CREATED SET")
+    res.send({message: "Set successfully created!", status: "success"})
+  })
+})
+
+app.get("/api/sets", async (req, res) => {
+
+  pool.query("SELECT users.username AS owner, sets.name, sets.description, sets.terms FROM sets INNER JOIN users ON sets.owner = users.id LIMIT 50", (err, result) => {
+    if(err){
+      throw err
+    }
+
+    res.send(result.rows)
+  })
 })
 
 app.get("/api/user", passport.authenticate("jwt", {session: false}), async (req, res) => {

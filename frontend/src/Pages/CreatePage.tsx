@@ -5,6 +5,7 @@ import "./CreatePage.css"
 import { GradientButton } from '../components/GradientButton';
 import { TermInput } from '../components/TermInput';
 import { Term } from '../app/types/term';
+import axios from 'axios';
 
 interface Props {
 
@@ -13,6 +14,8 @@ interface Props {
 export const CreatePage: React.FC<Props> = () => {
   const { t, i18n } = useTranslation();
 
+  const [name, setName] = useState("")
+  const [description, setDescription] = useState("")
   const [terms, setTerms] = useState<Term[]>([])
 
   const addTerm = () => {
@@ -34,6 +37,19 @@ export const CreatePage: React.FC<Props> = () => {
     setTerms(temp)
   }
 
+  const createSet = () => {
+    axios({
+      method: "POST",
+      data: {
+        name: name,
+        description: description,
+        terms: JSON.stringify(terms)
+      },
+      withCredentials: true,
+      url: "/api/sets/",
+    })
+  }
+
   const cards = terms.map((term, index) => {
     return (
       <TermInput term={term} key={index} index={index} remove={removeTerm} modify={modifyTerm}/>
@@ -46,9 +62,9 @@ export const CreatePage: React.FC<Props> = () => {
 
       <div className='info'>
         <h2>{t("info")}</h2>
-        <input placeholder={t("name")}></input>
+        <input onChange={(e) => setName(e.target.value)} placeholder={t("name")}></input>
         <br/>
-        <textarea rows={4} placeholder={t("description")}></textarea>
+        <textarea onChange={(e) => setDescription(e.target.value)} rows={4} placeholder={t("description")}></textarea>
       </div>
 
       <hr className='break'/>
@@ -64,6 +80,10 @@ export const CreatePage: React.FC<Props> = () => {
         </div>
 
       </div>
+
+      <hr className='break'/>
+
+      <GradientButton onClick={createSet}>{t("create")}</GradientButton>
       
     </div>
   );

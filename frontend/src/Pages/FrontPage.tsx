@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GradientButton } from "../components/GradientButton";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -9,6 +9,7 @@ import { userLogin } from "../app/behaviours/userSlice";
 import { SetCard } from "../components/SetCard";
 
 import "./FrontPage.css"
+import { Set } from "../app/types/set";
 
 interface Props {}
 
@@ -19,6 +20,8 @@ export const FrontPage: React.FC<Props> = () => {
   const dispatch = useDispatch()
   const user = useSelector((state: RootState) => state.user)
 
+  const [sets, setSets] = useState<Set[]>([])
+
   const logout = () => {
     axios.post("/api/logout").then((response) => {
       if(response.status == 200){
@@ -26,6 +29,20 @@ export const FrontPage: React.FC<Props> = () => {
       }
     })
   }
+
+  useEffect(() => {
+    axios.get("/api/sets").then((response) => {
+      if(response.data){
+        setSets(response.data)
+      }
+    })
+  }, [])
+
+  const setCards = sets.map((set) => {
+    return (
+      <SetCard set={set} />
+    );
+  })
 
   return (
     <div className="column frontpage">
@@ -71,7 +88,7 @@ export const FrontPage: React.FC<Props> = () => {
       <h2>Sets</h2>
       
       <div className="setlist">
-        <SetCard set={{name: "Test", owner: "Test owner", terms: 215}} />
+        {setCards}
       </div>
 
     </div>

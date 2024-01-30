@@ -1,5 +1,8 @@
+import { Term } from "./term"
+
 export type Set = {
   name: string,
-  terms: number,
+  description: string,
+  terms: Term[],
   owner: string
 }

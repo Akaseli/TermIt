@@ -10,7 +10,10 @@ export const SetCard: React.FC<Props> = ({set}) => {
   return(
     <div className="setcard">
       <p className="name">{set.name}</p>
-      <p className="count">{set.terms + " terms"}</p>
+      <p className="description">{set.description}</p>
+
+      <p className="count">{set.terms.length + " terms"}</p>
+
       <div className="owner">
         <div className="img"></div>
         <p>{set.owner}</p>

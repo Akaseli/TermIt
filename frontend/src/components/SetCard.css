@@ -21,8 +21,9 @@
   font-weight: 600;
   font-size: larger;
   margin-bottom: 0.5em;
-  padding: 0px;
   margin-left: 1em;
+  padding: 0px;
+ 
 }
 
 .setcard .count{
@@ -36,6 +37,15 @@
 
   font-weight: 300;
   font-size: small;
+}
+
+.setcard .description{
+  margin-left: 1.5em;
+  margin-top: 0em;
+  padding: 0px;
+
+  font-size: small;
+  color: rgb(161, 161, 161);
 }
 
 .setcard .owner{
