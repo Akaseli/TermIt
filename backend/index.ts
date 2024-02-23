@@ -204,7 +204,7 @@ app.post("/api/sets", passport.authenticate("jwt", {session: false}), async (req
 
 app.get("/api/sets", async (req, res) => {
 
-  pool.query("SELECT users.username AS owner, sets.name, sets.description, sets.terms FROM sets INNER JOIN users ON sets.owner = users.id LIMIT 50", (err, result) => {
+  pool.query("SELECT sets.id, users.username AS owner, sets.name, sets.description, sets.terms FROM sets INNER JOIN users ON sets.owner = users.id LIMIT 50", (err, result) => {
     if(err){
       throw err
     }

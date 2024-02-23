@@ -4,5 +4,6 @@ export type Set = {
   name: string,
   description: string,
   terms: Term[],
-  owner: string
+  owner: string,
+  id: number
 }

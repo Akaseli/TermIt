@@ -55,51 +55,6 @@ input:focus, textarea:focus{
   outline: solid rgb(70, 70, 70);
 }
 
-.appbar {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-left: 0px;
-  background-color: rgb(37, 37, 37);
-  box-shadow: 0px 5px 5px rgb(41, 41, 41);
-  font-size: larger;
-}
-
-.appbar p {
-  margin: 0;
-}
-
-.langMenu {
-  padding: 10px;
-  display: flex;
-  align-items: center;
-}
-
-.langSelector {
-  padding: 5px;
-  margin-left: 5px;
-
-  min-width: 10ch;
-  max-width: 20ch;
-
-  color: white;
-
-  border: 1px solid rgb(68, 68, 68);
-  border-radius: 0.25em;
-
-  cursor: pointer;
-  background-color: rgb(33, 33, 33);
-  display: grid;
-}
-
-.langFlag {
-  height: 30px;
-}
-
-.footer{
-  background-color: rgb(37, 37, 37);
-}
-
 /* Scrollbar */
 ::-webkit-scrollbar{
   width: 10px;

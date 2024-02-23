@@ -1,29 +1,16 @@
 import { useEffect } from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { FrontPage } from "./Pages/FrontPage";
-import { SignupPage } from "./Pages/SignupPage";
-import { useTranslation } from "react-i18next";
-import { ErrorPage } from "./Pages/ErrorPage";
-import { LoginPage } from "./Pages/LoginPage";
+import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./app/store";
 import axios from "axios";
-import { userLogin } from "./app/behaviours/userSlice";
-
 import "./App.css";
-import { CreatePage } from "./Pages/CreatePage";
+import { userLogin } from "./app/behaviours/userSlice";
+import { Appbar } from "./components/Appbar";
+import { Footer } from "./components/Footer";
+
+
 
 function App() {
-  const router = createBrowserRouter([
-    { path: "/", Component: FrontPage },
-    { path: "/signup", Component: SignupPage },
-    { path: "/login", Component: LoginPage },
-    { path: "/create", Component: CreatePage},
-    { path: "*", Component: ErrorPage },
-  ]);
-
-  const { t, i18n } = useTranslation();
-
   const dispatch = useDispatch()
   const user = useSelector((state: RootState) => state.user)
 
@@ -42,36 +29,15 @@ function App() {
 
   return (
     <div>
-      <div className="appbar">
-        <a href="/" className="logo">
-          <p>TermIt</p>
-        </a>
-
-        
-      </div>
+      <Appbar />
 
       <div className="content">
-        <RouterProvider router={router} />
+        <Outlet/>
       </div>
+      
 
-      <div className="footer">
-        <div className="langMenu">
-            <img
-              className="langFlag"
-              src={`/api/static/flags/${i18n.language}.svg`}
-            />
-            <select
-              className="langSelector"
-              defaultValue={i18n.language}
-              onChange={(e) => {
-                i18n.changeLanguage(e.target.value);
-              }}
-            >
-              <option value={"fi"}>suomi</option>
-              <option value={"en"}>English</option>
-            </select>
-          </div>
-      </div>
+      <Footer />
+
     </div>
   );
 }
