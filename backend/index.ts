@@ -213,6 +213,18 @@ app.get("/api/sets", async (req, res) => {
   })
 })
 
+app.get("/api/sets/:id", async (req, res) => {
+  const id = req.params.id;
+
+  pool.query("SELECT sets.id, users.username AS owner, sets.name, sets.description, sets.terms FROM sets INNER JOIN users ON sets.owner = users.id WHERE sets.id = $1", [req.params.id], (err, result) => {
+    if(err){
+      throw err
+    }
+
+    res.send(result.rows[0])
+  })
+})
+
 app.get("/api/user", passport.authenticate("jwt", {session: false}), async (req, res) => {
   res.send({id: req.user?.id, username: req.user?.username})
 })
