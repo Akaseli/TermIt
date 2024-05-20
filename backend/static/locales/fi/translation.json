@@ -13,5 +13,10 @@
   "info": "Tiedot",
   "name": "Nimi",
   "description": "Kuvaus",
-  "sets": "Katso listoja"
+  "sets": "Katso listoja",
+  "setlist": "Listat",
+  "owner": "Tekijänä",
+  "write": "Kirjoita",
+  "flashcards": "Muistikortit",
+  "test": "Testaa"
 }

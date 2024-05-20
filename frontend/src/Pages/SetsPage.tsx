@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { SetCard } from '../components/SetCard'
 import { Set } from "../app/types/set";
 import "./SetsPage.css";
+import { useTranslation } from 'react-i18next';
 
 interface Props {
 
@@ -10,6 +11,8 @@ interface Props {
 
 export const SetsPage: React.FC<Props> = () => {
   const [sets, setSets] = useState<Set[]>([])
+
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     axios.get("/api/sets").then((response) => {
@@ -27,7 +30,7 @@ export const SetsPage: React.FC<Props> = () => {
 
   return(
     <div className='column'>
-      <h2>Sets</h2>
+      <h2>{t("setlist")}</h2>
       
       <div className="setlist">
         {setCards}

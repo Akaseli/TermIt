@@ -13,5 +13,10 @@
   "info": "Info",
   "name": "Name",
   "description": "Description",
-  "sets": "View sets"
+  "sets": "View sets",
+  "setlist": "Sets",
+  "owner": "Made by",
+  "write": "Write",
+  "flashcards": "Flashcards",
+  "test": "Test"
 }
