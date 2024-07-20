@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next';
-import { useOutlet, useOutletContext } from 'react-router-dom';
+import { Link, useOutlet, useOutletContext } from 'react-router-dom';
 import { Set } from '../app/types/set';
 import { SetPageContext } from './SetPage';
 
@@ -22,6 +22,10 @@ export const SetFrontPage: React.FC<Props> = () => {
     );
   })
 
+  const flashCards = () => {
+    
+  }
+
   return(
     <div>
       <div className='row modes'>
@@ -29,9 +33,11 @@ export const SetFrontPage: React.FC<Props> = () => {
           {t("write")}
         </button>
 
-        <button className='modeButton'>
-          {t("flashcards")}
-        </button>
+        <Link to="./flashcards" relative="path">
+          <button className='modeButton'>
+            {t("flashcards")}
+          </button>
+        </Link>
 
         <button className='modeButton'>
           {t("test")}

@@ -18,6 +18,7 @@ import { Appbar } from './components/Appbar';
 import { Footer } from './components/Footer';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { FlashCardsPage } from "./Pages/FlashCardsPage";
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
             
             <Route path='/sets/:id' element={<SetPage />}>
               <Route index element={<SetFrontPage />} />
+              <Route path='flashcards' element={<FlashCardsPage />} />
             </Route>
 
             <Route path='*' element={<ErrorPage />} />
