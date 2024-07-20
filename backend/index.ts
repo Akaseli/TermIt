@@ -191,20 +191,37 @@ app.post("/api/sets", passport.authenticate("jwt", {session: false}), async (req
   const userId = req.user?.id
   const name = req.body.name
   const description = req.body.description
-  const terms = req.body.terms
+  const terms:any[] = JSON.parse(req.body.terms)
 
-  pool.query("INSERT INTO sets(owner, name, description, terms) VALUES ($1, $2, $3, $4)", [userId, name, description, terms], (err, result) => {
-    if(err){
-      throw err
-    }
+  let setId = -1
+
+  //Create SET
+  try{
+    const res = await pool.query("INSERT INTO sets(owner, name, description) VALUES ($1, $2, $3) RETURNING id", [userId, name, description])
+    setId = res.rows[0].id;
     console.log("CREATED SET")
-    res.send({message: "Set successfully created!", status: "success"})
-  })
+  }
+  catch (err){
+    throw err;
+  }
+
+  if(setId != -1){
+    terms.forEach((term:any) => {
+      pool.query("INSERT INTO terms(set_id, data) VALUES ($1, $2)", [setId, term], (err,response) => {
+        if(err){
+          throw err
+        }
+      })
+    })
+  }
+ 
+
+  res.send({message: "Set successfully created!", status: "success"})
 })
 
 app.get("/api/sets", async (req, res) => {
 
-  pool.query("SELECT sets.id, users.username AS owner, sets.name, sets.description, sets.terms FROM sets INNER JOIN users ON sets.owner = users.id LIMIT 50", (err, result) => {
+  pool.query("SELECT sets.id, users.username AS owner, sets.name, sets.description, ARRAY(SELECT terms.data FROM terms WHERE terms.set_id = sets.id) AS terms FROM sets INNER JOIN users ON sets.owner = users.id LIMIT 50", (err, result) => {
     if(err){
       throw err
     }
@@ -216,7 +233,7 @@ app.get("/api/sets", async (req, res) => {
 app.get("/api/sets/:id", async (req, res) => {
   const id = req.params.id;
 
-  pool.query("SELECT sets.id, users.username AS owner, sets.name, sets.description, sets.terms FROM sets INNER JOIN users ON sets.owner = users.id WHERE sets.id = $1", [req.params.id], (err, result) => {
+  pool.query("SELECT sets.id, users.username AS owner, sets.name, sets.description, ARRAY(SELECT terms.data FROM terms WHERE terms.set_id = sets.id) AS terms FROM sets INNER JOIN users ON sets.owner = users.id WHERE sets.id = $1", [req.params.id], (err, result) => {
     if(err){
       throw err
     }

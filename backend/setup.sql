@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS "users" (
   id SERIAL PRIMARY KEY,
   username text,
   "password" text,
-  created_at timestamp
+  created_at timestamp DEFAULT current_timestamp
 );
 
 CREATE TABLE IF NOT EXISTS "sets" (
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS "sets" (
   "owner" integer REFERENCES users(id) ON DELETE CASCADE,
   "name" text,
   "description" text,
-  created_at timestamp
+  created_at timestamp DEFAULT current_timestamp
 );
 
 -- DAta = json with 2 arrays, definition and answers
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS "terms" (
   term_id SERIAL PRIMARY KEY,
   set_id integer REFERENCES sets(id) ON DELETE CASCADE,
   "data" json,
-  created_at timestamp
+  created_at timestamp DEFAULT current_timestamp
 );
 
 
