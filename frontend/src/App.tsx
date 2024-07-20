@@ -5,9 +5,19 @@ import { RootState } from "./app/store";
 import axios from "axios";
 import "./App.css";
 import { userLogin } from "./app/behaviours/userSlice";
-import { Appbar } from "./components/Appbar";
-import { Footer } from "./components/Footer";
 
+import { FrontPage } from "./Pages/FrontPage";
+import { SignupPage } from "./Pages/SignupPage";
+import { ErrorPage } from "./Pages/ErrorPage";
+import { LoginPage } from "./Pages/LoginPage";
+import { CreatePage } from "./Pages/CreatePage";
+import { SetPage } from "./Pages/SetPage";
+import { SetsPage } from "./Pages/SetsPage";
+import { SetFrontPage } from './Pages/SetFrontPage';
+import { Appbar } from './components/Appbar';
+import { Footer } from './components/Footer';
+
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 
 function App() {
@@ -32,12 +42,25 @@ function App() {
       <Appbar />
 
       <div className="content">
-        <Outlet/>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<FrontPage />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/signup' element={<SignupPage />} />
+            <Route path='/create' element={<CreatePage />} />
+            
+            <Route path='/sets' element={<SetsPage />}/>
+            
+            <Route path='/sets/:id' element={<SetPage />}>
+              <Route index element={<SetFrontPage />} />
+            </Route>
+
+            <Route path='*' element={<ErrorPage />} />
+          </Routes>
+        </BrowserRouter>
       </div>
-      
-
+    
       <Footer />
-
     </div>
   );
 }
