@@ -19,6 +19,7 @@ import { Footer } from './components/Footer';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { FlashCardsPage } from "./Pages/FlashCardsPage";
+import { WritePage } from "./Pages/WritePage";
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
             <Route path='/sets/:id' element={<SetPage />}>
               <Route index element={<SetFrontPage />} />
               <Route path='flashcards' element={<FlashCardsPage />} />
+              <Route path='write' element={<WritePage />} />
             </Route>
 
             <Route path='*' element={<ErrorPage />} />

@@ -16,10 +16,12 @@ export const CreatePage: React.FC<Props> = () => {
 
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
+
+  const [autoParseText, setParseText] = useState("")
   const [terms, setTerms] = useState<Term[]>([])
 
   const addTerm = () => {
-    setTerms([...terms, {term: "", definition: ""}])
+    setTerms([...terms, {term: "", definition: "", id: 0, right: 0, wrong: 0}])
   }
 
   const removeTerm = (index: number) => {
@@ -48,6 +50,19 @@ export const CreatePage: React.FC<Props> = () => {
       withCredentials: true,
       url: "/api/sets/",
     })
+  }
+
+  const autoParse = () => {
+    const parts = autoParseText.split("\n")
+    const words = parts.length / 2
+
+    const temp: Term[] = []
+
+    for (let i = 0; i < parts.length; i+=2) {
+      temp.push({term: parts[i], definition: parts[i+1], id: 0, right: 0, wrong: 0})
+    }
+
+    setTerms(temp);
   }
 
   const cards = terms.map((term, index) => {
@@ -82,6 +97,15 @@ export const CreatePage: React.FC<Props> = () => {
       </div>
 
       <hr className='break'/>
+
+      <div className='autoParse terms'>
+        <h2>Auto parse</h2>
+        <textarea onChange={(e) => setParseText(e.target.value)} rows={4} placeholder={"Paste text"}></textarea>
+        <GradientButton onClick={autoParse}>{"Parse"}</GradientButton>
+      </div>
+
+
+      <hr className='break' />
 
       <GradientButton onClick={createSet}>{t("create")}</GradientButton>
       

@@ -18,7 +18,7 @@ export const TermInput: React.FC<Props> = ({index,term,  remove, modify}) => {
   const defRef = useRef<HTMLInputElement>(null)
 
   const handleChange = () => {
-    let term: Term = {term: termRef.current?.value ?? "", definition: defRef.current?.value ?? ""}
+    let term: Term = {term: termRef.current?.value ?? "", definition: defRef.current?.value ?? "", id: 0, right: 0, wrong: 0}
     
     modify(index, term)
   }

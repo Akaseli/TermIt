@@ -27,5 +27,6 @@ CREATE TABLE IF NOT EXISTS "termdata"(
   id SERIAL PRIMARY KEY,
   user_id integer REFERENCES users(id) ON DELETE CASCADE,
   term_id integer REFERENCES terms(term_id) ON DELETE CASCADE,
-  "data" json
+  correct boolean,
+  "timestamp" timestamp DEFAULT current_timestamp
 );

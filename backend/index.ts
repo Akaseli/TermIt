@@ -219,9 +219,21 @@ app.post("/api/sets", passport.authenticate("jwt", {session: false}), async (req
   res.send({message: "Set successfully created!", status: "success"})
 })
 
+app.post("/api/sets/progress", passport.authenticate("jwt", {session: false}), async (req, res) => {
+  const userId = req.user?.id
+
+  pool.query("INSERT INTO termdata(user_id, term_id, correct) VALUES ($1, $2, $3)", [userId, req.body.term_id, req.body.correct], (err, response) => {
+    if(err){
+      throw err
+    }
+  })
+
+  res.send({message: "Progress saved!", status: "success"})
+})
+
 app.get("/api/sets", async (req, res) => {
 
-  pool.query("SELECT sets.id, users.username AS owner, sets.name, sets.description, ARRAY(SELECT terms.data FROM terms WHERE terms.set_id = sets.id) AS terms FROM sets INNER JOIN users ON sets.owner = users.id LIMIT 50", (err, result) => {
+  pool.query("SELECT sets.id, users.username AS owner, sets.name, sets.description, ARRAY (SELECT row_to_json(r) FROM (SELECT t.term_id AS id, t.data -> 'term' AS term, t.data -> 'definition' AS definition, 0 AS wrong, 0 AS right FROM terms t LEFT JOIN termdata d ON t.term_id = d.term_id WHERE t.set_id = sets.id GROUP BY t.term_id) r) AS terms FROM sets INNER JOIN users ON sets.owner = users.id LIMIT 50", (err, result) => {
     if(err){
       throw err
     }
@@ -230,10 +242,8 @@ app.get("/api/sets", async (req, res) => {
   })
 })
 
-app.get("/api/sets/:id", async (req, res) => {
-  const id = req.params.id;
-
-  pool.query("SELECT sets.id, users.username AS owner, sets.name, sets.description, ARRAY(SELECT terms.data FROM terms WHERE terms.set_id = sets.id) AS terms FROM sets INNER JOIN users ON sets.owner = users.id WHERE sets.id = $1", [req.params.id], (err, result) => {
+app.get("/api/sets/:id",  passport.authenticate("jwt", {session: false}), async (req, res) => {
+  pool.query("SELECT sets.id, users.username AS owner, sets.name, sets.description, ARRAY ( SELECT row_to_json(r) FROM ( SELECT t.term_id AS id, t.data -> 'term' AS term, t.data -> 'definition' AS definition, COUNT(NULLIF(d.correct, false)) AS right, COUNT(NULLIF(d.correct, true)) AS wrong FROM terms t LEFT JOIN termdata d ON t.term_id = d.term_id AND d.user_id = $1 WHERE t.set_id = sets.id GROUP BY t.term_id) r ) AS terms FROM sets INNER JOIN users ON sets.owner = users.id WHERE sets.id = $2", [req.user?.id, req.params.id], (err, result) => {
     if(err){
       throw err
     }
