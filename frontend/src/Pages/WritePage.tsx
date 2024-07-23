@@ -185,18 +185,20 @@ export const WritePage: React.FC<Props> = () => {
   }, [started])
 
 
-  function nextWord(){
-    console.log("Sending correct - " + rightRef.current)
-    setupNextWord()
+  function nextWord(override:boolean = false){
+    if(override){
+      setupNextWord(true)
+    }else{
+      setupNextWord(rightRef.current)
+    }
   }
 
   function override(){
     //TODO SEND CORRECT
-    setRight(true)
-    nextWord()
+    nextWord(true)
   }
 
-  function setupNextWord(){
+  function setupNextWord(correct: boolean){
     console.log("Next word")
     //Find the current word and advance it one set forward/backwards
     const currentWord = writeListMixRef.current[currentWordRef.current];
@@ -209,7 +211,7 @@ export const WritePage: React.FC<Props> = () => {
       method: "POST",
       data: {
         term_id: currentWord.id,
-        correct: rightRef.current,
+        correct: correct,
       },
       withCredentials: true,
       url: "/api/sets/progress/",
@@ -217,7 +219,7 @@ export const WritePage: React.FC<Props> = () => {
 
 
     //Advance forwards
-    if(rightRef.current){
+    if(correct){
       console.log("Advancing")
       if(inPracticing){
         let temp:Term[] = practicingWordsRef.current.slice()
