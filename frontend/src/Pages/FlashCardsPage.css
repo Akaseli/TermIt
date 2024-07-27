@@ -83,3 +83,37 @@
   overflow: hidden;
   transition: 0.4s ease-in-out;
 }
+
+.mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .flashcards .mobile{
+    display: inline;
+    height: 200px;
+    background-image: none;
+    background-color: #252525;
+    box-shadow: #0c0c0c 5px 5px 10px;
+  }
+
+
+  .mobile.left{
+    position: absolute;
+    left: 20px;
+  }
+
+  .mobile.right{
+    position: absolute;
+    right: 20px;
+  }
+
+
+  .card{
+    width: 300px;
+  }
+
+  .flashcards .progressBar{
+    width: 300px;
+  }
+}

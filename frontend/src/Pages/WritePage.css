@@ -19,3 +19,25 @@
 .writepage .stats{
   color: gray;
 }
+
+.inspecting{
+  height: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .writepage .mobile{
+    display: inline;
+  }
+
+  .writepage .desktop{
+    display: none;
+  }
+
+  .writepage .write, .writepage .stats{
+    width: 300px;
+  }
+
+  .flashcards .progressBar{
+    width: 300px;
+  }
+}

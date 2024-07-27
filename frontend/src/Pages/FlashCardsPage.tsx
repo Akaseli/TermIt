@@ -26,43 +26,55 @@ export const FlashCardsPage: React.FC<Props> = () => {
   function handleInput(event: KeyboardEvent) {
     
     if(event.key == "ArrowUp"){
-      if(cardRef.current){
-        cardRef.current.toggleAttribute("flipped")
-      }
+      flipCard()
     }
     //Wrong
     if(event.key == "ArrowLeft"){
-      axios({
-        method: "POST",
-        data: {
-          term_id: setRef.current?.terms[indexRef.current].id,
-          correct: false,
-        },
-        withCredentials: true,
-        url: "/api/sets/progress/",
-      })
-
-      if(indexRef.current < (setRef.current?.terms.length ?? 0)- 1){
-        cardRef.current?.toggleAttribute("left")
-        setTimeout(spawnNextCard, 500)
-      }
+      cardWrong()
     }
     //Right
     else if(event.key == "ArrowRight"){
-      axios({
-        method: "POST",
-        data: {
-          term_id: setRef.current?.terms[indexRef.current].id,
-          correct: true,
-        },
-        withCredentials: true,
-        url: "/api/sets/progress/",
-      })
+      cardRight()
+    }
+  }
 
-      if(indexRef.current < (setRef.current?.terms.length ?? 0)- 1){
-        cardRef.current?.toggleAttribute("right")
-        setTimeout(spawnNextCard, 500)
-      }
+  function flipCard(){
+    if(cardRef.current){
+      cardRef.current.toggleAttribute("flipped")
+    }
+  }
+
+  function cardRight(){
+    axios({
+      method: "POST",
+      data: {
+        term_id: setRef.current?.terms[indexRef.current].id,
+        correct: true,
+      },
+      withCredentials: true,
+      url: "/api/sets/progress/",
+    })
+
+    if(indexRef.current < (setRef.current?.terms.length ?? 0)- 1){
+      cardRef.current?.toggleAttribute("right")
+      setTimeout(spawnNextCard, 500)
+    }
+  }
+
+  function cardWrong(){
+    axios({
+      method: "POST",
+      data: {
+        term_id: setRef.current?.terms[indexRef.current].id,
+        correct: false,
+      },
+      withCredentials: true,
+      url: "/api/sets/progress/",
+    })
+
+    if(indexRef.current < (setRef.current?.terms.length ?? 0)- 1){
+      cardRef.current?.toggleAttribute("left")
+      setTimeout(spawnNextCard, 500)
     }
   }
 
@@ -95,7 +107,8 @@ export const FlashCardsPage: React.FC<Props> = () => {
   const barWidth = ((currentIndex + 1) / (context.set?.terms.length ?? 1)) * 500;
 
   const currentCard =  (
-    <div className='card' ref={cardRef}>
+
+    <div className='card' ref={cardRef} onClick={flipCard}>
       <div className='sides'>
         <div className='front'>
           <p>{context.set?.terms[currentIndex].definition}</p>
@@ -114,6 +127,8 @@ export const FlashCardsPage: React.FC<Props> = () => {
       </div>
       {currentCard}
      
+     <button className='mobile left' onClick={cardWrong}>{"<"}</button>
+     <button className='mobile right' onClick={cardRight}>{">"}</button>
     </div>
   );
 }

@@ -73,6 +73,17 @@ export const WritePage: React.FC<Props> = () => {
     }
   }
 
+  function simulateEnter(){
+    if(startedRef.current){
+      if(inspectingRef.current){
+        nextWord()
+      }
+      else{
+        submit()
+      }
+    }
+  }
+
   useEffect(() => {
     //Add listener
     document.addEventListener("keyup", handleInput)
@@ -193,8 +204,9 @@ export const WritePage: React.FC<Props> = () => {
     }
   }
 
-  function override(){
+  function override(event: React.MouseEvent<HTMLButtonElement>){
     //TODO SEND CORRECT
+    event.stopPropagation()
     nextWord(true)
   }
 
@@ -289,11 +301,12 @@ export const WritePage: React.FC<Props> = () => {
         {writeListMixRef.current.length > 0 ?
           (
             inspecting ? (
-              <div> 
+              <div className="inspecting" onClick={simulateEnter}> 
                 <h2>{right ? "Correct" : "Wrong"}</h2>
                 <p>{"You guessed: " + currentGuess}</p>
                 <p>{"Correct was: " + writeListMixRef.current[currentWord].term}</p>
-                <p>Press enter to continue</p>
+                <p className='desktop'>Press enter to continue</p>
+                <p className='mobile'>Tap to continue</p>
                 {
                   right ? "" : <button onClick={override}>Press to override</button>
                 }
@@ -302,6 +315,7 @@ export const WritePage: React.FC<Props> = () => {
             <div>
               <p>{writeListMixRef.current[currentWord].definition}</p>
               <input ref={inputRef} onChange={(e) => {setGuess(e.target.value)}}></input>
+              <button className='mobile' onClick={simulateEnter}>Submit</button>
             </div>
             )
           ) : "not"
