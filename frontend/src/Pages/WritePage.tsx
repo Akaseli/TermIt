@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import "./WritePage.css"
 import { SetPageContext } from './SetPage';
-import { useOutletContext } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 import { Term } from '../app/types/term';
 import { GradientButton } from '../components/GradientButton';
 import axios from 'axios';
@@ -183,7 +183,6 @@ export const WritePage: React.FC<Props> = () => {
       }
     });
 
-    console.log("GUESS WAS " + right)
     setRight(right)
     setInspecting(true)
   }
@@ -211,7 +210,7 @@ export const WritePage: React.FC<Props> = () => {
   }
 
   function setupNextWord(correct: boolean){
-    console.log("Next word")
+    //console.log("Next word")
     //Find the current word and advance it one set forward/backwards
     const currentWord = writeListMixRef.current[currentWordRef.current];
     const inPracticing = practicingWordsRef.current.find((term) => term.id == currentWord.id)
@@ -232,14 +231,14 @@ export const WritePage: React.FC<Props> = () => {
 
     //Advance forwards
     if(correct){
-      console.log("Advancing")
+      //console.log("Advancing")
       if(inPracticing){
         let temp:Term[] = practicingWordsRef.current.slice()
 
         //Remove
         temp = temp.filter((term) => term.id != currentWord.id)
         
-        console.log(currentWord);
+        //console.log(currentWord);
 
         practicingWordsRef.current = temp
 
@@ -248,7 +247,7 @@ export const WritePage: React.FC<Props> = () => {
         temp.push(currentWord)
 
         learningWordsRef.current = temp
-        console.log(learningWordsRef.current)
+        //console.log(learningWordsRef.current)
       }
       else if(inLearning){
         let temp = learningWordsRef.current.slice()
@@ -264,14 +263,14 @@ export const WritePage: React.FC<Props> = () => {
     //Put back
     else{
       if(inLearning){
-        console.log("Putting back " + currentWord.term)
+        //console.log("Putting back " + currentWord.term)
         let temp = learningWordsRef.current.slice()
 
         //Remove
         temp = temp.filter((term) => term.id != currentWord.id)
         learningWordsRef.current = temp
 
-        console.log(learningWordsRef.current)
+        //console.log(learningWordsRef.current)
 
         //Add pracitcing
         practicingWordsRef.current = [...practicingWordsRef.current, currentWord]
@@ -318,7 +317,7 @@ export const WritePage: React.FC<Props> = () => {
               <button className='mobile' onClick={simulateEnter}>Submit</button>
             </div>
             )
-          ) : "not"
+          ) : "Round completed. Return by pressing button on top right corner."
         }
       </div>
       <div className='row stats'>

@@ -6,6 +6,7 @@ import { GradientButton } from '../components/GradientButton';
 import { TermInput } from '../components/TermInput';
 import { Term } from '../app/types/term';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 interface Props {
 
@@ -13,12 +14,14 @@ interface Props {
 
 export const CreatePage: React.FC<Props> = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate()
 
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
 
   const [autoParseText, setParseText] = useState("")
   const [terms, setTerms] = useState<Term[]>([])
+
 
   const addTerm = () => {
     setTerms([...terms, {term: "", definition: "", id: 0, right: 0, wrong: 0}])
@@ -49,6 +52,14 @@ export const CreatePage: React.FC<Props> = () => {
       },
       withCredentials: true,
       url: "/api/sets/",
+    })
+    .then((response) => {
+      if(response.data.status == "success"){
+        navigate("/sets")
+      }
+      else{
+        //TODO: handle error + add snackbars/similar
+      }
     })
   }
 
