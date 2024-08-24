@@ -243,7 +243,7 @@ app.get("/api/sets", async (req, res) => {
 })
 
 app.get("/api/sets/:id",  passport.authenticate("jwt", {session: false}), async (req, res) => {
-  pool.query("SELECT sets.id, users.username AS owner, sets.name, sets.description, ARRAY ( SELECT row_to_json(r) FROM ( SELECT t.term_id AS id, t.data -> 'term' AS term, t.data -> 'definition' AS definition, COUNT(NULLIF(d.correct, false)) AS right, COUNT(NULLIF(d.correct, true)) AS wrong FROM terms t LEFT JOIN termdata d ON t.term_id = d.term_id AND d.user_id = $1 WHERE t.set_id = sets.id GROUP BY t.term_id) r ) AS terms FROM sets INNER JOIN users ON sets.owner = users.id WHERE sets.id = $2", [req.user?.id, req.params.id], (err, result) => {
+  pool.query("SELECT sets.id, users.username AS owner, sets.name, sets.description, ARRAY ( SELECT row_to_json(r) FROM ( SELECT t.term_id AS id, t.data -> 'term' AS term, t.data -> 'definition' AS definition, COUNT(NULLIF(d.correct, false)) AS right, COUNT(NULLIF(d.correct, true)) AS wrong FROM terms t LEFT JOIN termdata d ON t.term_id = d.term_id AND d.user_id = $1 AND d.timestamp >= current_date - 7 WHERE (t.set_id = sets.id) GROUP BY t.term_id) r ) AS terms FROM sets INNER JOIN users ON sets.owner = users.id WHERE sets.id = $2", [req.user?.id, req.params.id], (err, result) => {
     if(err){
       throw err
     }
