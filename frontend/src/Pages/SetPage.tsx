@@ -24,7 +24,14 @@ export const SetPage: React.FC<Props> = () => {
 
   function backToSetPage(){
     fetchSets()
-    navigate("/sets/" + params["id"])
+
+    if(window.location.href.endsWith("/sets/" + params["id"])){
+      navigate("/sets/")
+    }
+    else{
+      navigate("/sets/" + params["id"])
+    }
+
   }
 
   function fetchSets(){

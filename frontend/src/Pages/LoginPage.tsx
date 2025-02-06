@@ -14,6 +14,8 @@ export const LoginPage: React.FC<Props> = () => {
   const [loginPass, setLoginPass] = useState("")
   const [loginUser, setLoginUser] = useState("")
 
+  const [error, setError] = useState(null);
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -33,7 +35,7 @@ export const LoginPage: React.FC<Props> = () => {
         dispatch(userLogin({id: response.data.id, username: response.data.username}))
         navigate("/")
       } else {
-        //Show error/etc
+        setError(response.data.message);
       }
     })
   }
@@ -50,6 +52,14 @@ export const LoginPage: React.FC<Props> = () => {
         </div>
 
         <GradientButton onClick={login}>{t("login")}</GradientButton>
+
+        {
+          (error != null) ? (
+            <div className="row error">
+              <p>{t(error)}</p>
+            </div>  
+          ) : <div/>
+        }
       </div>
     </div>
   )

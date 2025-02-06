@@ -134,12 +134,12 @@ app.post("/api/login/", (req, res) => {
       }
       //Incorrect password
       else{
-        res.send({message: "Incorrect username or password.", status: "failure"})
+        res.send({message: "iuop", status: "failure"})
       }
     }
     //No user
     else{
-      res.send({message: "Incorrect username or password.", status: "failure"})
+      res.send({message: "iuop", status: "failure"})
     }
   })
 })
@@ -161,7 +161,7 @@ app.post("/api/signup/", (req, res) => {
     }
     // User exists
     if (result.rows.length > 0){
-      res.send({message: "Username taken.", status: "failure"})
+      res.send({message: "ut", status: "failure"})
     }
 
     //Doesnt exist -> Create user

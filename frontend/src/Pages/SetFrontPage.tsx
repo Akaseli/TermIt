@@ -50,7 +50,7 @@ export const SetFrontPage: React.FC<Props> = () => {
           </button>
         </Link>
 
-        <button className='modeButton'>
+        <button className='modeButton' disabled>
           {t("test")}
         </button>
       </div>

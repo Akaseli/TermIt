@@ -12,6 +12,8 @@ export const SignupPage: React.FC<Props> = () => {
   const [registerPass, setRegisterPass] = useState("");
   const [registerUser, setRegisterUser] = useState("");
 
+  const [error, setError] = useState(null);
+
   const navigate = useNavigate();
 
   const signup = () => {
@@ -28,7 +30,7 @@ export const SignupPage: React.FC<Props> = () => {
       if (response.data.status == "success") {
         navigate("/login");
       } else {
-        //Show error/etc
+        setError(response.data.message);
       }
     });
   };
@@ -45,6 +47,14 @@ export const SignupPage: React.FC<Props> = () => {
         </div>
 
         <GradientButton onClick={signup}>{t("signup")}</GradientButton>
+
+        {
+          (error != null) ? (
+            <div className="row error">
+              <p>{t(error)}</p>
+            </div>  
+          ) : <div/>
+        }
       </div>
     </div>
   );

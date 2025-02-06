@@ -18,5 +18,8 @@
   "owner": "Tekijänä",
   "write": "Kirjoita",
   "flashcards": "Muistikortit",
-  "test": "Testaa"
+  "test": "Testaa",
+  "terms_p": "termiä",
+  "iuop": "Väärä käyttäjänimi tai salasana.",
+  "ut": "Käyttäjänimi varattu."
 }
