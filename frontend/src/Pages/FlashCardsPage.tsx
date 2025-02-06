@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./FlashCardsPage.css"
 import { SetPageContext } from './SetPage';
-import { useOutletContext } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import axios from 'axios';
 import { Set } from '../app/types/set';
 
@@ -13,8 +13,9 @@ export const FlashCardsPage: React.FC<Props> = () => {
   const context = useOutletContext<SetPageContext>();
   const cardRef = useRef<HTMLDivElement>(null);
 
-
   const [currentIndex, setIndex] = useState(0);
+  const [done, setDone] = useState(false);
+
 
   //References for this function
   const indexRef = useRef(0)
@@ -59,9 +60,13 @@ export const FlashCardsPage: React.FC<Props> = () => {
       cardRef.current?.toggleAttribute("right")
       setTimeout(spawnNextCard, 500)
     }
+    else{
+      setDone(true)
+    }
   }
 
   function cardWrong(){
+    if(done) return;
     axios({
       method: "POST",
       data: {
@@ -75,6 +80,9 @@ export const FlashCardsPage: React.FC<Props> = () => {
     if(indexRef.current < (setRef.current?.terms.length ?? 0)- 1){
       cardRef.current?.toggleAttribute("left")
       setTimeout(spawnNextCard, 500)
+    }
+    else{
+      setDone(true);
     }
   }
 
@@ -95,12 +103,15 @@ export const FlashCardsPage: React.FC<Props> = () => {
 
   useEffect(() => {
     //Add listener
-    document.addEventListener("keyup", handleInput)
+    if(!done){
+      document.addEventListener("keyup", handleInput)
+    }
+
     //Remove listener
     return () => {
       document.removeEventListener("keyup", handleInput);
     } 
-  }, [])
+  }, [done])
 
 
   //Calculate progress bar
@@ -125,7 +136,10 @@ export const FlashCardsPage: React.FC<Props> = () => {
       <div className='progressBar'>
         <div className='bar' style={{width: barWidth}}/>
       </div>
-      {currentCard}
+      {
+        done ? (<p>All done!</p>) :  (currentCard )
+      }
+      
      
      <button className='mobile left' onClick={cardWrong}>{"<"}</button>
      <button className='mobile right' onClick={cardRight}>{">"}</button>

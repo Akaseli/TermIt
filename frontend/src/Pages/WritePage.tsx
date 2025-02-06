@@ -155,7 +155,7 @@ export const WritePage: React.FC<Props> = () => {
     let tempLIst:Term[] = []
     //Count matching terms and add to temp list
     context.set?.terms.forEach((term) => {
-      let percentage = (term.right / (term.wrong + term.right)) * 100
+      let percentage = (term.right / Math.max(term.wrong + term.right, 1)) * 100
 
       if(percentage <= cutOff){
         tempLIst.push(term)
