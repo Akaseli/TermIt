@@ -28,7 +28,7 @@ export const TermInput: React.FC<Props> = ({index,term,  remove, modify}) => {
       <p>{index+1}</p>
       <input ref={termRef} onChange={handleChange} placeholder={t("term")} value={term.term}></input>
       <input ref={defRef} onChange={handleChange} placeholder={t("definition")} value={term.definition}></input>
-      <GradientButton onClick={() => {remove(index)}}>Remove</GradientButton>
+      <GradientButton onClick={() => {remove(index)}}>{t("remove")}</GradientButton>
     </div>
   );
 }

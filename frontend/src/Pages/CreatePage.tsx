@@ -107,19 +107,17 @@ export const CreatePage: React.FC<Props> = () => {
 
       </div>
 
-      <hr className='break'/>
-
-      <div className='autoParse terms'>
-        <h2>Auto parse</h2>
-        <textarea onChange={(e) => setParseText(e.target.value)} rows={4} placeholder={"Paste text"}></textarea>
-        <GradientButton onClick={autoParse}>{"Parse"}</GradientButton>
-      </div>
-
-
       <hr className='break' />
 
       <GradientButton onClick={createSet}>{t("create")}</GradientButton>
       
+      <hr className='break'/>
+
+      <div className='autoParse terms'>
+        <h2>Auto parse (HTML table copy paste)</h2>
+        <textarea onChange={(e) => setParseText(e.target.value)} rows={4} placeholder={"Paste text"}></textarea>
+        <GradientButton onClick={autoParse}>{"Parse"}</GradientButton>
+      </div>
     </div>
   );
 }

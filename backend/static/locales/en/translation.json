@@ -21,5 +21,25 @@
   "test": "Test",
   "terms_p": "terms",
   "iuop": "Incorrect username or password.",
-  "ut": "Username taken."
+  "ut": "Username taken.",
+  "left": "Wrong (left arrow)",
+  "up": "Flip (up arrow)",
+  "right": "Correct (right arrow)",
+  "done": "All done!",
+  "correct": "Correct",
+  "wrong": "Wrong",
+  "yourguess": "You guessed",
+  "correctwas": "Correct was",
+  "continue": "Press enter to continue",
+  "continue_mobile": "Tap to continue",
+  "override": "Press to override",
+  "submit": "Submit",
+  "completed": "Round completed. Return by pressing button on top right corner.",
+  "nseen": "Not seen",
+  "practicing": "Practicing",
+  "getting": "Getting there",
+  "mastered": "Mastered",
+  "remove": "Remove",
+  "404": "404 Page not found!"
+
 }

@@ -5,12 +5,14 @@ import { Link, useOutletContext } from 'react-router-dom';
 import { Term } from '../app/types/term';
 import { GradientButton } from '../components/GradientButton';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
 
 }
 
 export const WritePage: React.FC<Props> = () => {
+  const { t, i18n } = useTranslation();
   const context = useOutletContext<SetPageContext>();
 
   const [started, setStarted] = useState(false)
@@ -301,30 +303,30 @@ export const WritePage: React.FC<Props> = () => {
           (
             inspecting ? (
               <div className="inspecting" onClick={simulateEnter}> 
-                <h2>{right ? "Correct" : "Wrong"}</h2>
-                <p>{"You guessed: " + currentGuess}</p>
-                <p>{"Correct was: " + writeListMixRef.current[currentWord].term}</p>
-                <p className='desktop'>Press enter to continue</p>
-                <p className='mobile'>Tap to continue</p>
+                <h2>{right ? t("correct") : t("wrong")}</h2>
+                <p>{t("yourguess") + ": " + currentGuess}</p>
+                <p>{t("correctwas") + ": " + writeListMixRef.current[currentWord].term}</p>
+                <p className='desktop'>{t("continue")}</p>
+                <p className='mobile'>{t("continue_mobile")}</p>
                 {
-                  right ? "" : <button onClick={override}>Press to override</button>
+                  right ? "" : <button onClick={override}>{t("override")}</button>
                 }
               </div>
             ) : (
             <div>
               <p>{writeListMixRef.current[currentWord].definition}</p>
               <input ref={inputRef} onChange={(e) => {setGuess(e.target.value)}}></input>
-              <button className='mobile' onClick={simulateEnter}>Submit</button>
+              <button className='mobile' onClick={simulateEnter}>{t("submit")}</button>
             </div>
             )
-          ) : "Round completed. Return by pressing button on top right corner."
+          ) : t("completed")
         }
       </div>
       <div className='row stats'>
-        <p>{"Not seen: " + wordsToPracticeRef.current.length}</p>
-        <p>{"Praciting: " + practicingWordsRef.current.length}</p>
-        <p>{"Getting there: " + learningWordsRef.current.length}</p>
-        <p>{"Mastered: " + learntWordsRef.current.length}</p>
+        <p>{t("nseen") + ": " + wordsToPracticeRef.current.length}</p>
+        <p>{t("practicing") +": " + practicingWordsRef.current.length}</p>
+        <p>{t("getting") +": " + learningWordsRef.current.length}</p>
+        <p>{t("mastered") + ": " + learntWordsRef.current.length}</p>
       </div>
     </div>
   )

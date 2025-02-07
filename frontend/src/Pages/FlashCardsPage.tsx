@@ -4,12 +4,14 @@ import { SetPageContext } from './SetPage';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import axios from 'axios';
 import { Set } from '../app/types/set';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
 
 }
 
 export const FlashCardsPage: React.FC<Props> = () => {
+  const { t, i18n } = useTranslation();
   const context = useOutletContext<SetPageContext>();
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -137,10 +139,10 @@ export const FlashCardsPage: React.FC<Props> = () => {
         <div className='bar' style={{width: barWidth}}/>
       </div>
       {
-        done ? (<p>All done!</p>) :  (currentCard )
+        done ? (<p>{t("done")}</p>) :  (currentCard )
       }
       
-     
+     <p className='hint'>{ t("left") + " - " + t("up") + " - " + t("right")}</p>
      <button className='mobile left' onClick={cardWrong}>{"<"}</button>
      <button className='mobile right' onClick={cardRight}>{">"}</button>
     </div>

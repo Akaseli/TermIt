@@ -1,4 +1,5 @@
 import * as dotenv from "dotenv"
+
 dotenv.config({ path: __dirname + '/.env' })
 
 import express from "express"
@@ -9,6 +10,7 @@ import bodyParser, { urlencoded } from "body-parser"
 import session from "express-session"
 import passport from "passport"
 import jwt from "jsonwebtoken"
+import path from "path"
 import { StrategyOptions, Strategy as JwtStrategy } from "passport-jwt";
 import { Pool } from "pg";
 
@@ -28,7 +30,14 @@ const pool = new Pool({
   connectionString: `postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}`,
 })
 
-app.use("/api/static", express.static('backend/static'))
+//Server backend static files
+if(process.env.PRODUCTION){
+  app.use("/api/static", express.static(path.resolve(__dirname, '../static')))
+}
+else{
+  app.use("/api/static", express.static('backend/static'))
+}
+
 
 app.use(
   cors({
@@ -146,6 +155,11 @@ app.post("/api/login/", (req, res) => {
 
 app.post("/api/signup/", (req, res) => {
 
+  if(process.env.BLOCKACCOUNTS){
+    res.send({message: "Account creation is blocked for this demo.", status: "failure"})
+    return
+  }
+
   if(req.body.username.length < 4){
     res.send({message: "Username too short."})
     return
@@ -255,6 +269,17 @@ app.get("/api/sets/:id",  passport.authenticate("jwt", {session: false}), async 
 app.get("/api/user", passport.authenticate("jwt", {session: false}), async (req, res) => {
   res.send({id: req.user?.id, username: req.user?.username})
 })
+
+
+if(process.env.PRODUCTION){
+  console.log("Prod")
+
+  app.use(express.static(path.resolve(__dirname, "../../frontend/build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../../frontend/build", "index.html"))
+  })
+}
 
 server.listen(port, () => {
   console.log("Backend is up on port " + port)

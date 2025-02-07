@@ -7,8 +7,9 @@
     "dev": "concurrently -n \"backend,frontend\" -c \"blue,magenta\" \"npm run dev-backend\" \"npm run dev-frontend\"",
     "dev-backend": "nodemon - exec 'ts-node' backend/index.ts",
     "dev-frontend": "webpack serve --config frontend/webpack/webpack.config.js --env env=dev",
-    "build": "webpack --env env=prod",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --config frontend/webpack/webpack.config.js --env env=prod && tsc --project backend/tsconfig.json",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/build/index.js"
   },
   "keywords": [],
   "author": "",
